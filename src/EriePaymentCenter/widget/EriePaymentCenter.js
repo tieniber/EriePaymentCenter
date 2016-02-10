@@ -259,7 +259,7 @@ define([
 				logger.debug("Enroll bank details screen load - endorsment ");
 				$("." + this.drgContinue).hide(); // Continue
 				$("." + this.drgContinueChange).show(); //Endorsement Enrlomment submit
-				$("." + this.drgContinueChange).click(dojoLang.hitch(this, this.continueFromEnrollmentEndorsement);
+				$("." + this.drgContinueChange).click(dojoLang.hitch(this, this.continueFromEnrollmentEndorsement));
 			}
 		},
 
