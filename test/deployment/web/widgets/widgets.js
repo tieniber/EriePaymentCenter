@@ -1,0 +1,1 @@
+﻿define(["EriePaymentCenter/widget/EriePaymentCenter"], {});
