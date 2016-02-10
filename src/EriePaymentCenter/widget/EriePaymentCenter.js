@@ -101,7 +101,7 @@ define([
 			}
 			
 			this._paymentCenter = new this.PaymentCenterCoordinator(this._contextObj.get(this.urlParam), this.customDivID, this);
-			
+			window.PaymentCenter = this._paymentCenter;
 			
 			/*
 			Below are the listeners triggered from payment center to this.  
