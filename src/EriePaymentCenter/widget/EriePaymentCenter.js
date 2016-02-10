@@ -70,6 +70,8 @@ define([
         _alertDiv: null,
 		_paymentCenter: null,
 		_pid: null,
+		_transactionTypeData: "",
+		_reqIdentifierData: "",
 		
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
         constructor: function () {
@@ -88,7 +90,10 @@ define([
             logger.debug(this.id + ".update");
 
             this._contextObj = obj;
-            
+			this._transactionTypeData = this._contextObj.get(this.transactionType);
+            this._reqIdentifierData = this._contextObj.get(this.reqIdentifier);
+			
+			
 			if (this.customDivID !== "") {
 				this.domNode.id = this.customDivID;
 			}
@@ -126,11 +131,11 @@ define([
 
 
 			//Newbusiness,rewrite display the deafult dragon action buttons.
-			if (this.transactionType === "9" || this.transactionType === "3604") {
+			if (this._transactionTypeData === "9" || this._transactionTypeData === "3604") {
 				logger.debug("document load - new business");
-				$("." + this.drgSubmitNo).show(); //SUbmit no down payment  
+				$("." + this.drgSubmitNo).show(); //Submit no down payment  
 
-			} else if (this.transactionType === "4") {
+			} else if (this._transactionTypeData === "4") {
 				logger.debug("document load - endorsment");
 				$("." + this.drgContinueChange).show(); //Endorsement Enrollment submit
 
@@ -240,14 +245,14 @@ define([
 			$("." + this.drgContinueError).hide(); // Continue Error
 			$("." + this.drgContinueChangeError).hide(); // Change Summary Error
 			//Newbusiness and rewrite
-			if(this.transactionType === "9" || this.transactionType === "3604")
+			if(this._transactionTypeData === "9" || this._transactionTypeData === "3604")
 			{	
 				logger.debug("Enroll bank details screen load - newbusiness ");
 				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
 				$("." + this.drgContinue).show(); // Continue
 				$("." + this.drgContinue).click(this.continueFromEnrollmentNewbusiness);
 
-			}else if(this.transactionType === "4"){	
+			}else if(this._transactionTypeData === "4"){	
 				//Endoserments
 				logger.debug("Enroll bank details screen load - endorsment ");
 				$("." + this.drgContinue).hide(); // Continue
@@ -343,7 +348,7 @@ define([
 			$("." + this.drgSubmitNo).hide(); //SUbmit no down payment	
 
 			//Newbusiness and rewrite
-			if(this.transactionType === "9" || this.transactionType === "3604"){	
+			if(this._transactionTypeData === "9" || this._transactionTypeData === "3604"){	
 				logger.debug("EFT error occured - NB");
 				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
 				$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment error submit
@@ -352,7 +357,7 @@ define([
 
 				$("." + this.drgContinueError).click(this.downPaymentOnEftError);
 
-			}else if(this.transactionType === "4"){	
+			}else if(this._transactionTypeData === "4"){	
 				logger.debug("EFT error occured - EN");
 				//Endoserments
 				$("." + this.drgContinue).hide(); // Continue
@@ -369,7 +374,7 @@ define([
 		oopsDisplayed: function(e) {
 			logger.debug("downpayment error");  
 			//Newbusiness and rewrite
-			if(this.transactionType === "9" || this.transactionType === "3604"){
+			if(this._transactionTypeData === "9" || this._transactionTypeData === "3604"){
 				$("." + this.drgContinue).hide(); // Continue
 				$("." + this.drgContinueError).hide(); //Continue
 				$("." + this.drgSubmitDown).hide(); //SUbmit down payment	
@@ -377,7 +382,7 @@ define([
 				$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment submit Error
 
 
-				if (this.reqIdentifier === "00000000-0000-0000-0000-000000000000" ) {    
+				if (this._reqIdentifierData === "00000000-0000-0000-0000-000000000000" ) {    
 				$("." + this.drgSubmit).hide(); // Submit
 				$("." + this.drgSubmitNo).show(); //SUbmit no down payment	
 				} else {    
@@ -385,7 +390,7 @@ define([
 				$("." + this.drgSubmit).show(); // Submit
 				$("." + this.drgSubmitNo).hide(); //SUbmit no down payment	
 				}
-			}else if(this.transactionType === "4"){	
+			}else if(this._transactionTypeData === "4"){	
 
 				$("." + this.drgContinue).hide(); // Continue
 				$("." + this.drgContinueError).hide(); // Continue
