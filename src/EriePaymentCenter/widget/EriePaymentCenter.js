@@ -107,20 +107,20 @@ define([
 			Below are the listeners triggered from payment center to this.  
 				**********Registering the Listeners***************	
 			*/
-			this._paymentCenter.on("load", this.stopSpinner);
-			this._paymentCenter.on("eftEnrollInit", this.erieExpress);
-			this._paymentCenter.on("state.first", this.downPayment);
-			this._paymentCenter.on("state.final", this.transactionDetails);
-			this._paymentCenter.on("completed", this.savePaymentInformation);
-			this._paymentCenter.on("processingEnrollment", this.startSpinner);
-			this._paymentCenter.on("processing", this.startSpinner);
-			this._paymentCenter.on("stop-processing", this.stopSpinner);
-			this._paymentCenter.on("eftEnrollError", this.eftErrorOccured);
-			this._paymentCenter.on("state.error", this.oopsDisplayed);
+			this._paymentCenter.on("load", dojoLang.hitch(this, this.stopSpinner));
+			this._paymentCenter.on("eftEnrollInit", dojoLang.hitch(this, this.erieExpress));
+			this._paymentCenter.on("state.first", dojoLang.hitch(this, this.downPayment));
+			this._paymentCenter.on("state.final", dojoLang.hitch(this, this.transactionDetails));
+			this._paymentCenter.on("completed", dojoLang.hitch(this, this.savePaymentInformation));
+			this._paymentCenter.on("processingEnrollment", dojoLang.hitch(this, this.startSpinner));
+			this._paymentCenter.on("processing", dojoLang.hitch(this, this.startSpinner));
+			this._paymentCenter.on("stop-processing", dojoLang.hitch(this, this.stopSpinner));
+			this._paymentCenter.on("eftEnrollError", dojoLang.hitch(this, this.eftErrorOccured));
+			this._paymentCenter.on("state.error", dojoLang.hitch(this, this.oopsDisplayed));
 
 			//Endorsement changes
-			this._paymentCenter.on("processingEndorsementChanges", this.startSpinner);
-			this._paymentCenter.on("endorsementChangesComplete", this.EndorsementChangesCompleted);
+			this._paymentCenter.on("processingEndorsementChanges", dojoLang.hitch(this, this.startSpinner));
+			this._paymentCenter.on("endorsementChangesComplete", dojoLang.hitch(this, this.EndorsementChangesCompleted));
 
 			// Hide all the buttons
 			$("." + this.drgContinue).hide(); // Continue to down payment(first time)
@@ -252,14 +252,14 @@ define([
 				logger.debug("Enroll bank details screen load - newbusiness ");
 				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
 				$("." + this.drgContinue).show(); // Continue
-				$("." + this.drgContinue).click(this.continueFromEnrollmentNewbusiness);
+				$("." + this.drgContinue).click(dojoLang.hitch(this, this.continueFromEnrollmentNewbusiness));
 
 			}else if(this._transactionTypeData === "4"){	
 				//Endoserments
 				logger.debug("Enroll bank details screen load - endorsment ");
 				$("." + this.drgContinue).hide(); // Continue
 				$("." + this.drgContinueChange).show(); //Endorsement Enrlomment submit
-				$("." + this.drgContinueChange).click(this.continueFromEnrollmentEndorsement);
+				$("." + this.drgContinueChange).click(dojoLang.hitch(this, this.continueFromEnrollmentEndorsement);
 			}
 		},
 
@@ -320,7 +320,7 @@ define([
 			$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
 			$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment error submit
 			$("." + this.drgSubmitDown).show(); //Submit down payment
-			$("." + this.drgSubmitDown).click(this.submitDownPayment);
+			$("." + this.drgSubmitDown).click(dojoLang.hitch(this, this.submitDownPayment));
 		},
 		/*
 		When payment center triggers the "state.final" listener, dragon invoke this function to continue submitting the policy.
@@ -357,7 +357,7 @@ define([
 				$("." + this.drgContinue).hide(); // Continue
 				$("." + this.drgContinueError).show(); // Continue
 
-				$("." + this.drgContinueError).click(this.downPaymentOnEftError);
+				$("." + this.drgContinueError).click(dojoLang.hitch(this, this.downPaymentOnEftError));
 
 			}else if(this._transactionTypeData === "4"){	
 				logger.debug("EFT error occured - EN");
