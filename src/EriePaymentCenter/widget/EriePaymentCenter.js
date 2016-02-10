@@ -69,6 +69,7 @@ define([
         _contextObj: null,
         _alertDiv: null,
 		_paymentCenter: null,
+		_pid: null,
 		
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
         constructor: function () {
@@ -212,14 +213,19 @@ define([
 		/*This event will be triggered by paymencenter when ever the paymentcenrer start processing any action(like display of enrlomment screen,downpayment..etc)*/
 		startSpinner: function(e) {
 			logger.debug("start spinner");
-			//TODO
+			
+			this._pid = mx.ui.showProgress();
+			
 		},
 
 		/*This event will be triggered by paymentcenetr when ever the paymentcenrer done with processing of any action(submit enrollment enrlomment screen and downpayment..etc)*/
 
 		stopSpinner: function(e) {
 			logger.debug("stop spinner");
-			//TODO
+			
+			if (this._pid !== null) {
+				mx.ui.hideProgress(this._pid);
+			}
 		},	
 		/*
 		If the selected pay plan on the policy is "G"  then PC triggers this function to display "Continue" button. 

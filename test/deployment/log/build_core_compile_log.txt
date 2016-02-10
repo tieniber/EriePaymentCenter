@@ -1,7 +1,7 @@
 Buildfile: C:\Users\eti\Documents\Projects\Custom Widgets\EriePaymentCenter\test\deployment\build_core.xml
 
 compile:
-    [javac] Compiling 4 source files to C:\Users\eti\Documents\Projects\Custom Widgets\EriePaymentCenter\test\deployment\run\bin
+    [javac] Compiling 2 source files to C:\Users\eti\Documents\Projects\Custom Widgets\EriePaymentCenter\test\deployment\run\bin
     [javac] Note: C:\Users\eti\Documents\Projects\Custom Widgets\EriePaymentCenter\test\javasource\com\mendix\core\Core.java uses unchecked or unsafe operations.
     [javac] Note: Recompile with -Xlint:unchecked for details.
 
@@ -15,7 +15,7 @@ build:
       [bnd] # project (project.jar) 44 
 
 BUILD SUCCESSFUL
-Total time: 2 seconds
+Total time: 3 seconds
 
 
 
