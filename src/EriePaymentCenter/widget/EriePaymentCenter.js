@@ -76,13 +76,15 @@ define([
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
         constructor: function () {
             // Uncomment the following line to enable debug messages
-            //logger.level(logger.DEBUG);
+            logger.level(logger.DEBUG);
             logger.debug(this.id + ".constructor");
         },
 
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
             logger.debug(this.id + ".postCreate");
+			
+			this.startSpinner("");
         },
 
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
