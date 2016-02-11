@@ -34,10 +34,11 @@ define([
     "dojo/text",
     "dojo/html",
     "dojo/_base/event",
+	"dojo/json",
 
     "EriePaymentCenter/lib/jquery-1.11.2",
     "dojo/text!EriePaymentCenter/widget/template/EriePaymentCenter.html"
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoProp, dojoGeometry, dojoClass, dojoStyle, dojoConstruct, dojoArray, dojoLang, dojoText, dojoHtml, dojoEvent, _jQuery, widgetTemplate) {
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoProp, dojoGeometry, dojoClass, dojoStyle, dojoConstruct, dojoArray, dojoLang, dojoText, dojoHtml, dojoEvent, dojoJson, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
@@ -55,6 +56,8 @@ define([
 		customDivID: "",
 		transactionType: "",
 		reqIdentifier: "",
+		responseAttr: "",
+		mfToExecute: "",
 		
 		//Button classes used for actions outside of iframe
 		drgContinue: "",
@@ -433,7 +436,31 @@ define([
 		*/
 		saveResponse: function(response){
 			logger.debug("save response invoke");
-			//TODO
+			
+			var myJson = dojoJson.stringify(response);
+			this._contextObj.setAttribute(this.responseAttr, myJson);
+
+			
+			// If a microflow has been set execute the microflow on a click.
+			if (this.mfToExecute !== "") {
+				mx.data.action({
+					params: {
+						applyto: "selection",
+						actionname: this.mfToExecute,
+						guids: [ this._contextObj.getGuid() ]
+					},
+					store: {
+						caller: this.mxform
+					},
+					callback: function(obj) {
+						//TODO what to do when all is ok!
+					},
+					error: dojoLang.hitch(this, function(error) {
+						console.log(this.id + ": An error occurred while executing microflow: " + error.description);
+					})
+				}, this);
+			}
+			/* Original code from JSP file below  */
 			/*
 			var sessionId = document.framework.elements['DRAGON_SESSION_ID'].value;
 			var transId = document.framework.elements['DRAGON_TRANSACTION_ID'].value;

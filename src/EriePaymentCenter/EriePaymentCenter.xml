@@ -35,6 +35,20 @@
 				<attributeType name="String"/> 
 			</attributeTypes>
 		</property>
+		<property key="responseAttr" type="attribute" isPath="optional" pathType="reference">
+			<caption>Response</caption>
+			<category>Data source</category>
+			<description>The attribute that should be populated with Payment Center's response.</description>
+			<attributeTypes>
+				<attributeType name="String"/> 
+			</attributeTypes>
+		</property>
+		<property key="mfToExecute" type="microflow" required="false">
+			<caption>Response microflow</caption>
+			<category>Response</category>
+			<description>Microflow to call when the payment center returns a response.</description>
+			<returnType type="Void"></returnType>
+    	</property>
 		<!--Buttons-->
 		<property key="drgContinue" type="string" defaultValue="" required="false">
 	  		<caption>Continue button class</caption>
