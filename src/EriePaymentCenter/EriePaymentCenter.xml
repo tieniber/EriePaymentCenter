@@ -50,37 +50,37 @@
 			<returnType type="Void"></returnType>
     	</property>
 		<!--Buttons-->
-		<property key="drgContinue" type="string" defaultValue="" required="false">
+		<property key="btnContinue" type="string" defaultValue="" required="false">
 	  		<caption>Continue button class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for continue to down payment(first time)</description>
 		</property>
-		<property key="drgContinueError" type="string" defaultValue="" required="false">
+		<property key="btnContinueError" type="string" defaultValue="" required="false">
 	  		<caption>Continue button error class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for continue to down payment if there is any error while saving bank details(second time)</description>
 		</property>
-		<property key="drgSubmit" type="string" defaultValue="" required="false">
+		<property key="btnSubmit" type="string" defaultValue="" required="false">
 	  		<caption>Submit Application class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for submit application</description>
 		</property>
-		<property key="drgSubmitDown" type="string" defaultValue="" required="false">
+		<property key="btnSubmitDown" type="string" defaultValue="" required="false">
 	  		<caption>Submit down payment class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for submit down payment</description>
 		</property>
-		<property key="drgSubmitNo" type="string" defaultValue="" required="false">
+		<property key="btnSubmitNo" type="string" defaultValue="" required="false">
 	  		<caption>Submit Application No Downpayment class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for submit application without a downpayment</description>
 		</property>
-		<property key="drgContinueChange" type="string" defaultValue="" required="false">
+		<property key="btnContinueChange" type="string" defaultValue="" required="false">
 	  		<caption>Endorsement enrollment submit class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for endorsement enrollment submit</description>
 		</property>
-		<property key="drgContinueChangeError" type="string" defaultValue="" required="false">
+		<property key="btnContinueChangeError" type="string" defaultValue="" required="false">
 	  		<caption>Endorsement enrollment submit error class</caption>
 		  	<category>Buttons</category>
 		  	<description>Class of button for submit endorsment if there is any error in EFT</description>

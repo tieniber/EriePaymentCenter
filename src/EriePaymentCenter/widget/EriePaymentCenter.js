@@ -60,13 +60,13 @@ define([
 		mfToExecute: "",
 		
 		//Button classes used for actions outside of iframe
-		drgContinue: "",
-		drgContinueError: "",
-		drgSubmit: "",
-		drgSubmitDown: "",
-		drgSubmitNo: "",
-		drgContinueChange: "",
-		drgContinueChangeError: "",
+		btnContinue: "",
+		btnContinueError: "",
+		btnSubmit: "",
+		btnSubmitDown: "",
+		btnSubmitNo: "",
+		btnContinueChange: "",
+		btnContinueChangeError: "",
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _contextObj: null,
@@ -128,23 +128,23 @@ define([
 			this._paymentCenter.on("endorsementChangesComplete", dojoLang.hitch(this, this.EndorsementChangesCompleted));
 
 			// Hide all the buttons
-			$("." + this.drgContinue).hide(); // Continue to down payment(first time)
-			$("." + this.drgContinueError).hide();// Continue to down payment if there is any error while saving bank details(second time)
-			$("." + this.drgSubmit).hide(); // Submit
-			$("." + this.drgSubmitDown).hide(); //SUbmit down payment
-			$("." + this.drgSubmitNo).hide(); //SUbmit no down payment
-			$("." + this.drgContinueChange).hide(); //Endorsement Enrollment submit
-			$("." + this.drgContinueChangeError).hide(); //Endorsement Enrollment submit
+			$("." + this.btnContinue).hide(); // Continue to down payment(first time)
+			$("." + this.btnContinueError).hide();// Continue to down payment if there is any error while saving bank details(second time)
+			$("." + this.btnSubmit).hide(); // Submit
+			$("." + this.btnSubmitDown).hide(); //SUbmit down payment
+			$("." + this.btnSubmitNo).hide(); //SUbmit no down payment
+			$("." + this.btnContinueChange).hide(); //Endorsement Enrollment submit
+			$("." + this.btnContinueChangeError).hide(); //Endorsement Enrollment submit
 
 
 			//Newbusiness,rewrite display the deafult dragon action buttons.
 			if (this._transactionTypeData === "9" || this._transactionTypeData === "3604") {
 				logger.debug("document load - new business");
-				$("." + this.drgSubmitNo).show(); //Submit no down payment  
+				$("." + this.btnSubmitNo).show(); //Submit no down payment  
 
 			} else if (this._transactionTypeData === "4") {
 				logger.debug("document load - endorsment");
-				$("." + this.drgContinueChange).show(); //Endorsement Enrollment submit
+				$("." + this.btnContinueChange).show(); //Endorsement Enrollment submit
 
 			}
 	
@@ -246,25 +246,25 @@ define([
 		erieExpress: function(e) {
 			// Hide all the buttons
 			logger.debug("Enroll bank details screen load ");
-			$("." + this.drgSubmit).hide(); // Submit
-			$("." + this.drgSubmitDown).hide(); //Submit down payment
-			$("." + this.drgSubmitNo).hide(); //Submit no down payment	
-			$("." + this.drgContinueError).hide(); // Continue Error
-			$("." + this.drgContinueChangeError).hide(); // Change Summary Error
+			$("." + this.btnSubmit).hide(); // Submit
+			$("." + this.btnSubmitDown).hide(); //Submit down payment
+			$("." + this.btnSubmitNo).hide(); //Submit no down payment	
+			$("." + this.btnContinueError).hide(); // Continue Error
+			$("." + this.btnContinueChangeError).hide(); // Change Summary Error
 			//Newbusiness and rewrite
 			if(this._transactionTypeData === "9" || this._transactionTypeData === "3604")
 			{	
 				logger.debug("Enroll bank details screen load - newbusiness ");
-				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
-				$("." + this.drgContinue).show(); // Continue
-				$("." + this.drgContinue).click(dojoLang.hitch(this, this.continueFromEnrollmentNewbusiness));
+				$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit
+				$("." + this.btnContinue).show(); // Continue
+				$("." + this.btnContinue).click(dojoLang.hitch(this, this.continueFromEnrollmentNewbusiness));
 
 			}else if(this._transactionTypeData === "4"){	
 				//Endoserments
 				logger.debug("Enroll bank details screen load - endorsment ");
-				$("." + this.drgContinue).hide(); // Continue
-				$("." + this.drgContinueChange).show(); //Endorsement Enrlomment submit
-				$("." + this.drgContinueChange).click(dojoLang.hitch(this, this.continueFromEnrollmentEndorsement));
+				$("." + this.btnContinue).hide(); // Continue
+				$("." + this.btnContinueChange).show(); //Endorsement Enrlomment submit
+				$("." + this.btnContinueChange).click(dojoLang.hitch(this, this.continueFromEnrollmentEndorsement));
 			}
 		},
 
@@ -318,14 +318,14 @@ define([
 		*/	
 		downPayment: function(e){
 			logger.debug("down payment screen load");
-			$("." + this.drgSubmit).hide(); // Submit
-			$("." + this.drgContinue).hide(); //Continue
-			$("." + this.drgContinueError).hide(); //Continue
-			$("." + this.drgSubmitNo).hide(); //SUbmit no down payment	
-			$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
-			$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment error submit
-			$("." + this.drgSubmitDown).show(); //Submit down payment
-			$("." + this.drgSubmitDown).click(dojoLang.hitch(this, this.submitDownPayment));
+			$("." + this.btnSubmit).hide(); // Submit
+			$("." + this.btnContinue).hide(); //Continue
+			$("." + this.btnContinueError).hide(); //Continue
+			$("." + this.btnSubmitNo).hide(); //SUbmit no down payment	
+			$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit
+			$("." + this.btnContinueChangeError).hide(); //Endorsement Enrlomment error submit
+			$("." + this.btnSubmitDown).show(); //Submit down payment
+			$("." + this.btnSubmitDown).click(dojoLang.hitch(this, this.submitDownPayment));
 		},
 		/*
 		When payment center triggers the "state.final" listener, dragon invoke this function to continue submitting the policy.
@@ -333,14 +333,14 @@ define([
 		transactionDetails: function(e) {
 			logger.debug("trx details load");
 			// Hide all the buttons except dragon submit
-			$("." + this.drgContinue).hide(); // Continue
-			$("." + this.drgContinueError).hide(); //Continue
-			$("." + this.drgSubmitDown).hide(); //SUbmit down payment
-			$("." + this.drgSubmitNo).hide(); //SUbmit no down payment	
-			$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit			
-			$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment error submit
+			$("." + this.btnContinue).hide(); // Continue
+			$("." + this.btnContinueError).hide(); //Continue
+			$("." + this.btnSubmitDown).hide(); //SUbmit down payment
+			$("." + this.btnSubmitNo).hide(); //SUbmit no down payment	
+			$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit			
+			$("." + this.btnContinueChangeError).hide(); //Endorsement Enrlomment error submit
 
-			$("." + this.drgSubmit).show(); // Submit
+			$("." + this.btnSubmit).show(); // Submit
 		},
 		/* 
 		At any point in work-flow, if PC fires "'eftEnrollError" listener then dragon invokes below function.
@@ -350,28 +350,28 @@ define([
 
 			logger.debug("EFT error occured - NB or END");
 			// Hide all the buttons
-			$("." + this.drgSubmit).hide(); // Submit
-			$("." + this.drgSubmitDown).hide(); //SUbmit down payment
-			$("." + this.drgSubmitNo).hide(); //SUbmit no down payment	
+			$("." + this.btnSubmit).hide(); // Submit
+			$("." + this.btnSubmitDown).hide(); //SUbmit down payment
+			$("." + this.btnSubmitNo).hide(); //SUbmit no down payment	
 
 			//Newbusiness and rewrite
 			if(this._transactionTypeData === "9" || this._transactionTypeData === "3604"){	
 				logger.debug("EFT error occured - NB");
-				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
-				$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment error submit
-				$("." + this.drgContinue).hide(); // Continue
-				$("." + this.drgContinueError).show(); // Continue
+				$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit
+				$("." + this.btnContinueChangeError).hide(); //Endorsement Enrlomment error submit
+				$("." + this.btnContinue).hide(); // Continue
+				$("." + this.btnContinueError).show(); // Continue
 
-				$("." + this.drgContinueError).click(dojoLang.hitch(this, this.downPaymentOnEftError));
+				$("." + this.btnContinueError).click(dojoLang.hitch(this, this.downPaymentOnEftError));
 
 			}else if(this._transactionTypeData === "4"){	
 				logger.debug("EFT error occured - EN");
 				//Endoserments
-				$("." + this.drgContinue).hide(); // Continue
-				$("." + this.drgContinueError).hide(); // Continue
-				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
+				$("." + this.btnContinue).hide(); // Continue
+				$("." + this.btnContinueError).hide(); // Continue
+				$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit
 
-				$("." + this.drgContinueChangeError).show(); //Endorsement Enrlomment error submit
+				$("." + this.btnContinueChangeError).show(); //Endorsement Enrlomment error submit
 
 			}
 		},
@@ -382,31 +382,31 @@ define([
 			logger.debug("downpayment error");  
 			//Newbusiness and rewrite
 			if(this._transactionTypeData === "9" || this._transactionTypeData === "3604"){
-				$("." + this.drgContinue).hide(); // Continue
-				$("." + this.drgContinueError).hide(); //Continue
-				$("." + this.drgSubmitDown).hide(); //SUbmit down payment	
-				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
-				$("." + this.drgContinueChangeError).hide(); //Endorsement Enrlomment submit Error
+				$("." + this.btnContinue).hide(); // Continue
+				$("." + this.btnContinueError).hide(); //Continue
+				$("." + this.btnSubmitDown).hide(); //SUbmit down payment	
+				$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit
+				$("." + this.btnContinueChangeError).hide(); //Endorsement Enrlomment submit Error
 
 
 				if (this._reqIdentifierData === "00000000-0000-0000-0000-000000000000" ) {    
-				$("." + this.drgSubmit).hide(); // Submit
-				$("." + this.drgSubmitNo).show(); //SUbmit no down payment	
+				$("." + this.btnSubmit).hide(); // Submit
+				$("." + this.btnSubmitNo).show(); //SUbmit no down payment	
 				} else {    
 
-				$("." + this.drgSubmit).show(); // Submit
-				$("." + this.drgSubmitNo).hide(); //SUbmit no down payment	
+				$("." + this.btnSubmit).show(); // Submit
+				$("." + this.btnSubmitNo).hide(); //SUbmit no down payment	
 				}
 			}else if(this._transactionTypeData === "4"){	
 
-				$("." + this.drgContinue).hide(); // Continue
-				$("." + this.drgContinueError).hide(); // Continue
-				$("." + this.drgSubmit).hide(); // Submit
-				$("." + this.drgSubmitDown).hide(); //SUbmit down payment	
-				$("." + this.drgSubmitNo).hide(); //SUbmit no down payment
-				$("." + this.drgContinueChange).hide(); //Endorsement Enrlomment submit
+				$("." + this.btnContinue).hide(); // Continue
+				$("." + this.btnContinueError).hide(); // Continue
+				$("." + this.btnSubmit).hide(); // Submit
+				$("." + this.btnSubmitDown).hide(); //SUbmit down payment	
+				$("." + this.btnSubmitNo).hide(); //SUbmit no down payment
+				$("." + this.btnContinueChange).hide(); //Endorsement Enrlomment submit
 
-				$("." + this.drgContinueChangeError).show(); //Endorsement Enrlomment submit Error
+				$("." + this.btnContinueChangeError).show(); //Endorsement Enrlomment submit Error
 
 			}
 		}, 
